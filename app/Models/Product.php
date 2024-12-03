@@ -9,4 +9,19 @@ class Product extends Model
 {
     /** @use HasFactory<\Database\Factories\ProductFactory> */
     use HasFactory;
+
+    public function category()
+    {
+        return $this->belongsTo(Category::class);
+    }
+
+    public function supplier()
+    {
+        return $this->belongsTo(Supplier::class);
+    }
+
+    public function sale_detail()
+    {
+        return $this->hasMany(SaleDetail::class);
+    }
 }

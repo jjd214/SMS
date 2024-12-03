@@ -9,4 +9,9 @@ class Payment extends Model
 {
     /** @use HasFactory<\Database\Factories\PaymentFactory> */
     use HasFactory;
+
+    public function sale()
+    {
+        return $this->belongsTo(Sale::class);
+    }
 }

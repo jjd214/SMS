@@ -9,4 +9,14 @@ class SaleDetail extends Model
 {
     /** @use HasFactory<\Database\Factories\SaleDetailFactory> */
     use HasFactory;
+
+    public function sale()
+    {
+        return $this->belongsTo(Sale::class);
+    }
+
+    public function product()
+    {
+        return $this->belongsTo(Product::class);
+    }
 }

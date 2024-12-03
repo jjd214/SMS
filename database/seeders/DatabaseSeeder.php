@@ -36,8 +36,9 @@ class DatabaseSeeder extends Seeder
         Customer::factory(15)->create(); // Create 15 customers
 
         // Seed sales
-        Sale::factory(10)
-            ->has(SaleDetail::factory(3), 'saleDetails') // Each sale has 3 sale details
+        Sale::factory(10)->create();
+
+        SaleDetail::factory(3) // Each sale has 3 sale details
             ->create();
 
         // Seed inventory changes

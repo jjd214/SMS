@@ -19,7 +19,7 @@ class CustomerFactory extends Factory
         return [
             'name' => $this->faker->name, // Random customer name
             'phone' => $this->faker->phoneNumber, // Random phone number
-            'email' => $this->faker->optional()->unique()->safeEmail, // Random unique email, nullable
+            'email' => $this->faker->unique()->safeEmail, // Random unique email, nullable
             'address' => $this->faker->optional()->address, // Random address, nullable
         ];
     }
