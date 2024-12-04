@@ -46,9 +46,10 @@ class CategoryController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Category $category)
+    public function edit($id)
     {
-        //
+        $category = Category::findOrFail($id);
+        return view('pages.category.edit', compact('category'));
     }
 
     /**
@@ -56,7 +57,9 @@ class CategoryController extends Controller
      */
     public function update(UpdateCategoryRequest $request, Category $category)
     {
-        //
+        $category->update($request->validated());
+        session()->flash('info', 'Category updated successfully.');
+        return redirect()->route('category.index');
     }
 
     /**
@@ -64,6 +67,7 @@ class CategoryController extends Controller
      */
     public function destroy(Category $category)
     {
-        //
+        $category->delete();
+        return back()->with('success', 'Category deleted successfully.');
     }
 }

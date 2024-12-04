@@ -48,9 +48,17 @@
                                     <td class="px-6 py-4">
                                         {{ $category->created_at }}
                                     </td>
-                                    <td class="px-6 py-4">
-                                        <a href="#"
+                                    <td class="px-6 py-4 flex gap-1">
+                                        <a href="{{ route('category.edit', $category->id) }}"
                                             class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
+                                        <form action="{{ route('category.destroy', $category->id) }}" method="POST"
+                                            onsubmit="return confirm('Are you sure you want to delete this category?');">
+                                            @csrf
+                                            @method('delete')
+                                            <button type="submit"
+                                                class="font-medium text-red-600 dark:text-red-500 hover:underline">Delete</button>
+                                        </form>
+
                                     </td>
                                 </tr>
                             @empty
