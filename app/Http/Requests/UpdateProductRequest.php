@@ -11,7 +11,7 @@ class UpdateProductRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,27 @@ class UpdateProductRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'category_id' => 'required|integer',
+            'supplier_id' => 'required|integer',
+            'name' => 'required|string|max:255',
+            'description' => 'nullable|string|max:500',
+            'price' => 'required|numeric',
+            'cost_price' => 'required|numeric',
+            'qty' => 'required|integer',
+            'image' => 'nullable'
+        ];
+    }
+
+    public function messages(): array
+    {
+        return [
+            'category_id.required' => 'The category field is required.',
+            'supplier_id.required' => 'The supplier field is required.',
+            'name.required' => 'The product name is required.',
+            'price.required' => 'The price field is required.',
+            'cost_price.required' => 'The cost price field is required.',
+            'qty.required' => 'The quantity field is required.',
+            'image.image' => 'The image must be a valid image file.',
         ];
     }
 }

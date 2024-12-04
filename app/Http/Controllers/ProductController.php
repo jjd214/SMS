@@ -39,7 +39,17 @@ class ProductController extends Controller
      */
     public function store(StoreProductRequest $request)
     {
-        Product::create($request->validated());
+        $validatedData = $request->validated();
+
+        if ($request->hasFile('image')) {
+            $image = $request->file('image');
+            $path = 'images/products/';
+            $filename = 'PROD_IMG_' . uniqid() . '.' . $image->getClientOriginalExtension();
+            $image->move(public_path($path), $filename);
+            $validatedData['image'] = $filename;
+        }
+
+        Product::create($validatedData);
         session()->flash('success', 'Product added successfully.');
         return redirect()->route('product.index');
     }
@@ -55,9 +65,12 @@ class ProductController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Product $product)
+    public function edit($id)
     {
-        //
+        $product = Product::findOrFail($id);
+        $categories = Category::select('id', 'name')->get();
+        $suppliers = Supplier::select('id', 'name')->get();
+        return view('pages.product.edit', compact('product', 'categories', 'suppliers'));
     }
 
     /**
@@ -65,8 +78,25 @@ class ProductController extends Controller
      */
     public function update(UpdateProductRequest $request, Product $product)
     {
-        //
+        $validatedData = $request->validated();
+
+        if ($request->hasFile('image')) {
+            $path = 'images/products/';
+            $image = $request->file('image');
+            $filename = 'PROD_IMG_' . uniqid() . '.' . $image->getClientOriginalExtension();
+            $image->move(public_path($path), $filename);
+
+            if ($product->image && file_exists(public_path($path . $product->image))) {
+                unlink(public_path($path . $product->image));
+            }
+            $validatedData['image'] = $filename;
+        }
+        $product->update($validatedData);
+
+        session()->flash('info', 'Product updated successfully.');
+        return redirect()->route('product.index');
     }
+
 
     /**
      * Remove the specified resource from storage.

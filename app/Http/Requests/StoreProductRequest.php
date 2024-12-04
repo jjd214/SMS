@@ -29,7 +29,7 @@ class StoreProductRequest extends FormRequest
             'price' => 'required|numeric',
             'cost_price' => 'required|numeric',
             'qty' => 'required|integer',
-            'image' => 'nullable|image'
+            'image' => 'nullable'
         ];
     }
 
