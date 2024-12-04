@@ -29,6 +29,18 @@ class Product extends Model
 
     public function scopeSearch($query, $value)
     {
-        $query->where('name', 'like', "%$value%");
+        $query->where('name', 'like', "%$value%")
+            ->orWhere('category_id', $value);
+    }
+
+    public function image()
+    {
+        if (filter_var($this->image, FILTER_VALIDATE_URL)) {
+            return $this->image;
+        }
+
+        return $this->image
+            ? asset('images/products/' . $this->image)
+            : asset('images/default-img.png');
     }
 }

@@ -17,8 +17,11 @@ class ProductController extends Controller
     public function index(Request $request)
     {
         $search = $request->input('search') ?? '';
-        $products = Product::search($search)->orderBy('id', 'desc')->paginate(10);
-        return view('pages.product.index', compact('products'));
+        $filter_category = $request->input('category_id') ?? '';
+
+        $products = Product::search($search ?: $filter_category)->orderBy('id', 'desc')->paginate(10);
+        $categories = Category::select('id', 'name')->get();
+        return view('pages.product.index', compact('products', 'categories'));
     }
 
     /**
