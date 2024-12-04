@@ -5,15 +5,17 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreCategoryRequest;
 use App\Http\Requests\UpdateCategoryRequest;
 use App\Models\Category;
+use Illuminate\Http\Request;
 
 class CategoryController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $categories = Category::orderBy('id', 'desc')->paginate(5);
+        $search = $request->input('search') ?? '';
+        $categories = Category::search($search)->orderBy('id', 'desc')->paginate(5);
         return view('pages.category.index', compact('categories'));
     }
 
