@@ -135,14 +135,15 @@
                                     <td class="px-6 py-4 flex gap-1">
                                         <a href="{{ route('product.edit', $product->id) }}"
                                             class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
-                                        <form action="{{ route('product.destroy', $product->id) }}" method="POST"
-                                            onsubmit="return confirm('Are you sure you want to delete this product?');">
+                                        <form action="{{ route('product.destroy', $product->id) }}" method="post"
+                                            onsubmit="confirm('Are you sure you want to delete {{ $product->name }}?');">
                                             @csrf
                                             @method('delete')
                                             <button type="submit"
-                                                class="font-medium text-red-600 dark:text-red-500 hover:underline">Delete</button>
+                                                class="font-medium text-red-600 dark:text-red-500 hover:underline">
+                                                {{ _('Delete') }}
+                                            </button>
                                         </form>
-
                                     </td>
                                 </tr>
                             @empty
