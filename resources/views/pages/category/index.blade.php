@@ -71,7 +71,7 @@
                                         {{ $category->description }}
                                     </td>
                                     <td class="px-6 py-4">
-                                        {{ $category->created_at }}
+                                        {{ $category->created_at->format('Y-m-d') }}
                                     </td>
                                     <td class="px-6 py-4 flex gap-1">
                                         <a href="{{ route('category.edit', $category->id) }}"
