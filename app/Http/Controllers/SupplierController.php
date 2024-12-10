@@ -69,5 +69,11 @@ class SupplierController extends Controller
     public function destroy(Supplier $supplier)
     {
         //
+        try {
+            $supplier->delete();
+            return back()->with('success', 'Supplier deleted successfully.');
+        } catch (\Illuminate\Database\QueryException $e) {
+            return back()->with('info', 'The supplier cannot be deleted because it is associated with products.');
+        }
     }
 }

@@ -103,7 +103,6 @@ class ProductController extends Controller
      */
     public function destroy(Product $product)
     {
-        $product->sale_detail()->delete();
         $product->delete();
         return back()->with('success', 'Product deleted successfully.');
     }
