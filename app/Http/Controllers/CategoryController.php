@@ -33,8 +33,7 @@ class CategoryController extends Controller
     public function store(StoreCategoryRequest $request)
     {
         Category::create($request->validated());
-        session()->flash('success', 'Category added successfully.');
-        return redirect()->route('category.index');
+        return redirect()->route('category.index')->with('success', 'Category added successfully.');
     }
 
     /**
@@ -60,8 +59,7 @@ class CategoryController extends Controller
     public function update(UpdateCategoryRequest $request, Category $category)
     {
         $category->update($request->validated());
-        session()->flash('info', 'Category updated successfully.');
-        return redirect()->route('category.index');
+        return redirect()->route('category.index')->with('info', 'Category updated successfully.');
     }
 
     /**

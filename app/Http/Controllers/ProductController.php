@@ -50,8 +50,7 @@ class ProductController extends Controller
         }
 
         Product::create($validatedData);
-        session()->flash('success', 'Product added successfully.');
-        return redirect()->route('product.index');
+        return redirect()->route('product.index')->with('success', 'Product added successfully.');
     }
 
     /**
@@ -93,8 +92,7 @@ class ProductController extends Controller
         }
         $product->update($validatedData);
 
-        session()->flash('info', 'Product updated successfully.');
-        return redirect()->route('product.index');
+        return redirect()->route('product.index')->with('info', 'Product updated successfully.');
     }
 
 

@@ -35,8 +35,7 @@ class SupplierController extends Controller
     {
         //
         Supplier::create($request->validated());
-        session()->flash('success', 'Supplier added successfully.');
-        return redirect()->route('supplier.index');
+        return redirect()->route('suppliers.index')->with('success', 'Supplier added successfully.');
     }
 
     /**
@@ -50,9 +49,11 @@ class SupplierController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Supplier $supplier)
+    public function edit($id)
     {
         //
+        $supplier = Supplier::findOrFail($id);
+        return view('pages.supplier.edit', compact('supplier'));
     }
 
     /**
@@ -61,6 +62,8 @@ class SupplierController extends Controller
     public function update(UpdateSupplierRequest $request, Supplier $supplier)
     {
         //
+        $supplier->update($request->validated());
+        return redirect()->route('supplier.index')->with('info', 'Supplier updated successfully.');
     }
 
     /**

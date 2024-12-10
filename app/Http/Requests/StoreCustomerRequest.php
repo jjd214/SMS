@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class UpdateSupplierRequest extends FormRequest
+class StoreCustomerRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -23,9 +23,8 @@ class UpdateSupplierRequest extends FormRequest
     {
         return [
             'name' => 'required|string|max:255',
-            'contact_person' => 'required|string|max:255',
             'phone' => 'required|string|regex:/^\+?[0-9\s\-]{10,12}$/',
-            'email' => 'required|email|unique:suppliers,email,' . $this->route('supplier')->id,
+            'email' => 'required|email|unique:suppliers,email',
             'address' => 'required|string|max:255',
         ];
     }
@@ -34,7 +33,6 @@ class UpdateSupplierRequest extends FormRequest
     {
         return [
             'name.required' => 'Name is required.',
-            'contact_person.required' => 'Contact person is required.',
             'phone.required' => 'Phone number is required.',
             'phone.regex' => 'Phone number must be 10-12 digits and can include +, -, or spaces.',
             'email.required' => 'Email is required.',
