@@ -13,6 +13,7 @@
 
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+            <x-form-alerts />
             <div class="flex items-center justify-between">
                 <!-- Search Form -->
                 <form class="flex items-center max-w-sm mb-3" action="{{ route('supplier.index') }}" method="get">

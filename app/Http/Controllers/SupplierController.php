@@ -25,6 +25,7 @@ class SupplierController extends Controller
     public function create()
     {
         //
+        return view('pages.supplier.create');
     }
 
     /**
@@ -33,6 +34,9 @@ class SupplierController extends Controller
     public function store(StoreSupplierRequest $request)
     {
         //
+        Supplier::create($request->validated());
+        session()->flash('success', 'Supplier added successfully.');
+        return redirect()->route('supplier.index');
     }
 
     /**
