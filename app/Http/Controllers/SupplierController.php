@@ -5,16 +5,18 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreSupplierRequest;
 use App\Http\Requests\UpdateSupplierRequest;
 use App\Models\Supplier;
+use Illuminate\Http\Request;
 
 class SupplierController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
-        return view('pages.supplier.index');
+        $search = $request->input('search') ?? '';
+        $suppliers = Supplier::search($search)->orderBy('id', 'desc')->paginate(10);
+        return view('pages.supplier.index', compact('suppliers'));
     }
 
     /**
