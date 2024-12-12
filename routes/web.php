@@ -4,6 +4,7 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\SaleController;
 use App\Http\Controllers\SupplierController;
 use App\Models\Category;
 use App\Models\Product;
@@ -20,6 +21,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::resource('product', ProductController::class);
     Route::resource('supplier', SupplierController::class);
     Route::resource('customer', CustomerController::class);
+    Route::resource('sale', SaleController::class);
 });
 
 // Route::get('/dashboard', function () {
