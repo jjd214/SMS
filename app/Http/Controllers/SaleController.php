@@ -7,6 +7,7 @@ use App\Http\Requests\UpdateSaleRequest;
 use App\Models\Product;
 use App\Models\Sale;
 use App\Models\Customer;
+use App\Models\SaleDetail;
 
 class SaleController extends Controller
 {
@@ -37,14 +38,23 @@ class SaleController extends Controller
     public function store(StoreSaleRequest $request)
     {
         //
+        $request->validated();
+        $sale = Sale::create($request->all());
+        if ($sale) {
+            $sale_detail = new SaleDetail($request->all());
+            $sale->sale_detail()->save($sale_detail);
+        }
+        return redirect()->route('sale.index')->with('success', 'Sales added successfully.');
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Sale $sale)
+    public function show($id)
     {
         //
+        $sale = Sale::findOrFail($id);
+        return view('pages.sale.show', compact('sale'));
     }
 
     /**

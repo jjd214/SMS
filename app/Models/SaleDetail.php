@@ -10,6 +10,8 @@ class SaleDetail extends Model
     /** @use HasFactory<\Database\Factories\SaleDetailFactory> */
     use HasFactory;
 
+    protected $fillable = ['sale_id', 'product_id', 'qty', 'unit_price', 'total_price'];
+
     public function sale()
     {
         return $this->belongsTo(Sale::class);

@@ -11,7 +11,7 @@ class StoreSaleRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -23,6 +23,16 @@ class StoreSaleRequest extends FormRequest
     {
         return [
             //
+            'user_id' => 'required',
+            'customer_id' => 'required',
+            'product_id' => 'required',
+            'unit_price' => 'required|numeric',
+            'available_qty' => 'required|numeric',
+            'qty' => 'required|numeric',
+            'total_amount' => 'required|numeric',
+            'amount_paid' => 'required|numeric',
+            'change_due' => 'required|numeric',
+            'total_price' => 'required|numeric',
         ];
     }
 }

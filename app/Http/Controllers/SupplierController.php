@@ -35,7 +35,7 @@ class SupplierController extends Controller
     {
         //
         Supplier::create($request->validated());
-        return redirect()->route('suppliers.index')->with('success', 'Supplier added successfully.');
+        return redirect()->route('supplier.index')->with('success', 'Supplier added successfully.');
     }
 
     /**
