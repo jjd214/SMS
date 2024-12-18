@@ -7,6 +7,7 @@ use App\Http\Requests\UpdateSaleRequest;
 use App\Models\Product;
 use App\Models\Sale;
 use App\Models\Customer;
+use App\Models\Payment;
 use App\Models\SaleDetail;
 
 class SaleController extends Controller
@@ -43,6 +44,8 @@ class SaleController extends Controller
         if ($sale) {
             $sale_detail = new SaleDetail($request->all());
             $sale->sale_detail()->save($sale_detail);
+            $payment_detail = new Payment($request->all());
+            $sale->payment()->save($payment_detail);
         }
         return redirect()->route('sale.index')->with('success', 'Sales added successfully.');
     }

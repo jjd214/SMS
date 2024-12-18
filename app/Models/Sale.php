@@ -29,7 +29,7 @@ class Sale extends Model
 
     public function payment()
     {
-        return $this->hasMany(Payment::class);
+        return $this->hasOne(Payment::class);
     }
 
     public function product()

@@ -73,8 +73,11 @@
                         </div>
                     </div>
 
-                    <x-text-input id="total_price" name="total_price" type="hidden"
-                        class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-purple-500 focus:ring-purple-500" />
+                    <div class="mb-4">
+                        <x-text-input id="payment_method" name="payment_method" type="text"
+                            class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-purple-500 focus:ring-purple-500"
+                            value="{{ $sale->payment->payment_method }}" readonly />
+                    </div>
 
                     <div class="flex justify-start">
                         <button type="submit"

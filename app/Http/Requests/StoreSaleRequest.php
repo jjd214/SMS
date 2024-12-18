@@ -33,6 +33,7 @@ class StoreSaleRequest extends FormRequest
             'amount_paid' => 'required|numeric',
             'change_due' => 'required|numeric',
             'total_price' => 'required|numeric',
+            'payment_method' => 'required',
         ];
     }
 }

@@ -10,6 +10,8 @@ class Payment extends Model
     /** @use HasFactory<\Database\Factories\PaymentFactory> */
     use HasFactory;
 
+    protected $fillable = ['payment_method', 'amount_paid'];
+
     public function sale()
     {
         return $this->belongsTo(Sale::class);
